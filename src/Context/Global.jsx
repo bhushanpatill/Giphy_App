@@ -21,7 +21,7 @@ export const GlobalProvider = ({children}) => {
     const getTrending = async() => {
         dispatch({type:LOADING});
         const res = await axios.get(`https://api.giphy.com/v1/gifs/trending?api_key=OvFSd0y6eOElJEhKMZAhBT6EJV0vYbTa&limit=25`);
-        console.log(res);
+        // console.log(res);
         dispatch({type:GET_TRENDING, payload : res.data.data});
         // console.log(res.data.data);
     }
@@ -34,7 +34,7 @@ export const GlobalProvider = ({children}) => {
 
 
     return (
-        <GlobalContext.Provider value = {"Hellow"}>
+        <GlobalContext.Provider value = {{...state}}>
             {children}
         </GlobalContext.Provider>
     )
