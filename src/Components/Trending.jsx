@@ -4,6 +4,7 @@ import { useGlobal } from '../Context/Global';
 import GiffItem from './GiffItem';
 import Masonry from "react-masonry-css";
 import { useTheme } from '../Context/themeContext';
+import Loader from './Loader.jsx';
 
 const trend = <i className = "fa-solid fa-arrow-trend-up"></i>
 
@@ -15,7 +16,7 @@ const trend = <i className = "fa-solid fa-arrow-trend-up"></i>
 //   };
 
 function Trending() {
-    const {trending} = useGlobal();
+    const {trending, loading} = useGlobal();
     // console.log(trending);
 
     const theme = useTheme();
@@ -23,13 +24,14 @@ function Trending() {
   return (
     <TrendingStyled theme = {theme}>
         <h2>{trend} Trending</h2>
+        {loading && <Loader/>}
         <Masonry
             breakpointCols={4}
             className="my-masonry-grid"
             columnClassName="my-masonry-grid_column">
         {
             trending.map((giff) => {
-                return <GiffItem key = {giff.id} {...giff}/>
+                return <GiffItem key = {giff.id} {...giff} url = {giff.images.original.url}/>
             })
         }
         </Masonry>

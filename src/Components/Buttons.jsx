@@ -5,7 +5,7 @@ import { useTheme } from '../Context/themeContext';
 function Buttons({name, icon, onClick}) {
     const theme = useTheme();
   return (
-    <ButtonsStyled theme = {theme}>
+    <ButtonsStyled theme = {theme} onClick = {onClick}>
         <span>
             {icon}
             {name}

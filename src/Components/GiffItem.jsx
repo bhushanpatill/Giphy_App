@@ -1,25 +1,41 @@
-import React from "react";
+import React, { useState } from "react";
 import { useTheme } from "../Context/themeContext";
 import styled from "styled-components";
+import Modal from "./Modal.jsx";
+import { useGlobal } from "../Context/Global.jsx";
+import Loader from "./Loader.jsx";
 
 function GiffItem({
     id,
     title,
     embed_url,
-    images: {
-        original: { url },
-  }}){
+    url
+}){
 
     const theme = useTheme();
+
+    const {loading} = useGlobal();
+
+    const[modal,setModal] = useState(false);
+
     return (
         <GiffStyled theme = {theme}>
-            <div className="gif">
+            {modal && <Modal title = {title} url = {url} embed_url = {embed_url} setModal = {setModal}/>}
+            {loading ? <Loader/> : <div className="gif" onDoubleClick={()=>{setModal(true)}}>
                 <img src={url} alt={title} />
                     <div className = "love">
                         <i className = "fa-solid fa-heart"></i>
                     </div>
 
-            </div>
+            </div>}
+            {/* <div className="gif" onDoubleClick={()=>{setModal(true)}}>
+                <img src={url} alt={title} />
+                    <div className = "love">
+                        <i className = "fa-solid fa-heart"></i>
+                    </div>
+
+            </div> */}
+
         </GiffStyled>
   );
 }

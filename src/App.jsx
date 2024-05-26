@@ -5,10 +5,29 @@ import { useTheme, useThemeUpdate } from './Context/themeContext'
 import Header from './Components/Header';
 import Buttons from './Components/Buttons';
 import { useGlobal } from './Context/Global';
-import Trending from './Components/Trending';
+import Trending from './Components/Trending.jsx';
+import Random from './Components/Random.jsx';
 
 function App() {
+  const {getRandom} = useGlobal();
   const theme = useTheme();
+
+  const [rendered, setRendered] = useState('trending');
+
+  const content = () => {
+      switch(rendered){
+        case 'Trending':
+          return <Trending/>
+        case 'Liked':
+          return <Trending/>
+        case 'Random':
+          return <Random/>
+        case 'Search':
+          return <Trending/>
+        default:
+          return <Trending/>
+     }
+  }
 
   return (
     <AppStyled theme = {theme}>
@@ -17,18 +36,28 @@ function App() {
         <Buttons 
           name = {'Liked'}
           icon = {<i className = "fa-solid fa-heart"></i>}
+          onClick= {()=> {
+            setRendered('Liked')
+          }}
         />
         <Buttons 
           name = {'Trending GIF'}
           icon = {<i className = "fa-solid fa-arrow-trend-up"></i>}
+          onClick= {()=> {
+            setRendered('Trending')
+          }}
         />
         <Buttons 
-          name = {'Random GIF'}
+          name = {'Random'}
           icon = {<i className = "fa-solid fa-shuffle"></i>}
+          onClick= {()=> {
+            setRendered('Random')
+            getRandom();
+          }}
         />
       </div>
       <main>
-        <Trending/>
+        {content()};
       </main>
     </AppStyled>
   )

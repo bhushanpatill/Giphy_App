@@ -1,4 +1,4 @@
-import { LOADING } from "../Utils/GlobalActions";
+import { GET_RANDOM, LOADING } from "../Utils/GlobalActions";
 import { GET_TRENDING } from "../Utils/GlobalActions";
 
 export const globalReducer = (state, action) => {
@@ -11,6 +11,9 @@ export const globalReducer = (state, action) => {
         case GET_TRENDING:
             // console.log(action);
             return {...state, loading:false, trending: action.payload}
+
+        case GET_RANDOM:
+            return {...state, loading:false, random: action.payload}
 
         default:
              break;
