@@ -1,11 +1,27 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components';
 import { useTheme } from '../Context/themeContext';
+import { useGlobal } from '../Context/Global';
 
 const search = <i className="fa-solid fa-magnifying-glass"></i>
 
-function Header() {
+function Header({setRendered}) {
+    const {getSearch} = useGlobal();
     const theme = useTheme();
+    const [query, setQuery] = useState('');
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        getSearch(query);
+        setRendered('Search');
+        setQuery('');
+        if(query == ""){
+            setRendered('Trending');
+        }
+    }
+    const handleChange = (e) => {
+        setQuery(e.target.value);
+    }
   return (
      <HeaderStyled theme = {theme}>
         <div className="logo">
@@ -13,9 +29,9 @@ function Header() {
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28 35" className="sc-1f039a7e-2 bMXkCi"><g fillRule="evenodd" clipRule="evenodd"><path fill="#00ff99" d="M0 3h4v29H0z"></path><path fill="#9933ff" d="M24 11h4v21h-4z"></path><path fill="#00ccff" d="M0 31h28v4H0z"></path><path fill="#fff35c" d="M0 0h16v4H0z"></path><path fill="#ff6666" d="M24 8V4h-4V0h-4v12h12V8"></path><path className="shadow" d="M24 16v-4h4M16 0v4h-4"></path></g></svg>
             <h5 className = "GIFFY">GIFFY</h5>
         </div>
-        <form action = "">
+        <form action = "" onSubmit={handleSubmit}>
             <div className="input-control">
-                <input type="text" placeholder = "Search for GIF's"></input>
+                <input type="text" onChange = {handleChange} value = {query} placeholder = "Search for GIF's"></input>
                 <button className = "submit-btn">
                     {search}
                 </button>

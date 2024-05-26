@@ -7,6 +7,7 @@ import Buttons from './Components/Buttons';
 import { useGlobal } from './Context/Global';
 import Trending from './Components/Trending.jsx';
 import Random from './Components/Random.jsx';
+import Search from './Components/Search.jsx';
 
 function App() {
   const {getRandom} = useGlobal();
@@ -23,7 +24,7 @@ function App() {
         case 'Random':
           return <Random/>
         case 'Search':
-          return <Trending/>
+          return <Search/>
         default:
           return <Trending/>
      }
@@ -31,7 +32,7 @@ function App() {
 
   return (
     <AppStyled theme = {theme}>
-      <Header/>
+      <Header setRendered={setRendered}/>
       <div className="fetch-btns">
         <Buttons 
           name = {'Liked'}

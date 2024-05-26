@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useEffect, useReducer } from "react";
 import { globalReducer } from "../Reducers/globalReducer";
-import { GET_TRENDING, LOADING, GET_RANDOM } from "../Utils/GlobalActions.jsx";
+import { GET_TRENDING, LOADING, GET_RANDOM, GET_SEARCH } from "../Utils/GlobalActions.jsx";
 import axios from "axios";
 
 
@@ -35,6 +35,14 @@ export const GlobalProvider = ({children}) => {
 
     }
 
+    //get Search Results 
+    const getSearch = async(query) => {
+        dispatch({type:LOADING});
+        const res = await axios.get(`https://api.giphy.com/v1/gifs/search?api_key=OvFSd0y6eOElJEhKMZAhBT6EJV0vYbTa&q=${query}&limit=30`);
+        // console.log(res);
+        dispatch({type:GET_SEARCH, payload : res.data.data});
+    }
+
 
     //useeffect
 
@@ -47,6 +55,7 @@ export const GlobalProvider = ({children}) => {
     return (
         <GlobalContext.Provider value = {{...state,
             getRandom,
+            getSearch
         }}>
             {children}
         </GlobalContext.Provider>
