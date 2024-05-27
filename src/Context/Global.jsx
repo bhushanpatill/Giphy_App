@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useEffect, useReducer } from "react";
 import { globalReducer } from "../Reducers/globalReducer";
-import { GET_TRENDING, LOADING, GET_RANDOM, GET_SEARCH } from "../Utils/GlobalActions.jsx";
+import { GET_TRENDING, LOADING, GET_RANDOM, GET_SEARCH, ADD_TO_FAVOURITES, GET_FAVOURITES } from "../Utils/GlobalActions.jsx";
 import axios from "axios";
 
 
@@ -43,19 +43,59 @@ export const GlobalProvider = ({children}) => {
         dispatch({type:GET_SEARCH, payload : res.data.data});
     }
 
+    //Save to Liked
+    const saveToFavourites = (gif) => {
+        const storedItems = JSON.parse(window.localStorage.getItem("myfavourites")) || []
+        // if(!storedItems.some((item)=> item.id === gif)){
+        //     const items = [...storedItems,gif];
+        //     window.localStorage.setItem("myfavourites", JSON.stringify(items));
+        //     dispatch({type:ADD_TO_FAVOURITES, payload:gif});
+        //     alert("Added to Liked")
+        // }
+
+        // else{
+        //     alert("Already Exists")
+        // }
+
+        const existingItem = storedItems.find(item => item.id === gif.id)
+        if(!existingItem){
+            const items = [...storedItems,gif];
+            window.localStorage.setItem("myfavourites", JSON.stringify(items));
+            dispatch({type:ADD_TO_FAVOURITES, payload:gif});
+            alert("Added to Liked")
+        }
+        else{
+            alert("Already Exists")
+        }
+        
+    }
+
+    const removeFromLocalStorage = (gif) => {
+        const storedItems = JSON.parse(window.localStorage.getItem("myfavourites")) || []
+        const items = storedItems.filter((item)=> item.id !== gif.id)
+        window.localStorage.setItem('myfavourites', JSON.stringify(items))
+        getFromLocalStorage();
+    }
+
+    const getFromLocalStorage = () =>{
+        const storedItems = JSON.parse(window.localStorage.getItem("myfavourites")) || []
+        dispatch({type:GET_FAVOURITES, payload: storedItems});
+    }
 
     //useeffect
-
     useEffect(()=>{
         getTrending();
         getRandom();
+        getFromLocalStorage();
     },[])
 
 
     return (
         <GlobalContext.Provider value = {{...state,
             getRandom,
-            getSearch
+            getSearch,
+            saveToFavourites,
+            removeFromLocalStorage
         }}>
             {children}
         </GlobalContext.Provider>

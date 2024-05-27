@@ -1,9 +1,9 @@
 import React from 'react'
 import styled from 'styled-components'
-import { useGlobal } from '../Context/Global';
-import GiffItem from './GiffItem';
+import { useGlobal } from '../Context/Global.jsx';
+import GiffItem from './GiffItem.jsx';
 import Masonry from "react-masonry-css";
-import { useTheme } from '../Context/themeContext';
+import { useTheme } from '../Context/themeContext.jsx';
 import Loader from './Loader.jsx';
 
 const trend = <i className = "fa-solid fa-arrow-trend-up"></i>
@@ -15,39 +15,40 @@ const breakpointColumnsObj = {
     700: 1
   };
 
-function Trending() {
-    const {trending, loading} = useGlobal();
-    // console.log(trending);
+function Favourites({rendered}) {
+    const {favourites, loading} = useGlobal();
+    // console.log(Favourites);
 
     const theme = useTheme();
 
   return (
-    <TrendingStyled theme = {theme}>
-        <h2>{trend} Trending</h2>
+    <FavouritesStyled theme = {theme}>
+        <h2>{trend} Favourites</h2>
         {loading && <Loader/>}
         <Masonry
             breakpointCols={breakpointColumnsObj}
             className="my-masonry-grid"
             columnClassName="my-masonry-grid_column">
         {
-            trending.map((giff) => {
-                return <GiffItem key = {giff.id} {...giff} url = {giff.images.original.url}/>
+            favourites.map((giff) => {
+                // if (!giff || !giff.images || !giff.images.original) {
+                //     return null; // Skip rendering this item if data is incomplete
+                // }
+                // if(!giff){
+                //     return NULL;
+                // }
+                return <GiffItem key = {giff.id} {...giff} rendered = {rendered} url = {giff.url}/>
             })
         }
         </Masonry>
-    </TrendingStyled>
+    </FavouritesStyled>
   )
 }
 
-const TrendingStyled = styled.article`
+const FavouritesStyled = styled.article`
         padding:2rem;
         background-color:${props => props.theme.colorBg2};
         border-radius: 1rem;
-
-        // @media screen and (max-width:550px){
-        //     padding:1rem;
-        //     margin:12px 12px 12px 12px;
-        // }
 
         h2{
             font-size:2rem;
@@ -56,7 +57,6 @@ const TrendingStyled = styled.article`
             display:flex;
             align-items:center;
             gap:1rem;
-
             i{
                 background:linear-gradient(to right,
                     ${props => props.theme.colorBlue2},
@@ -87,4 +87,4 @@ const TrendingStyled = styled.article`
         }
 `;
 
-export default Trending
+export default Favourites

@@ -1,4 +1,4 @@
-import { GET_RANDOM, GET_SEARCH, LOADING } from "../Utils/GlobalActions";
+import { ADD_TO_FAVOURITES, GET_FAVOURITES, GET_RANDOM, GET_SEARCH, LOADING } from "../Utils/GlobalActions";
 import { GET_TRENDING } from "../Utils/GlobalActions";
 
 export const globalReducer = (state, action) => {
@@ -17,6 +17,18 @@ export const globalReducer = (state, action) => {
 
         case GET_SEARCH:
             return {...state, loading:false, searchResults: action.payload}
+
+        case ADD_TO_FAVOURITES:
+            return {
+                ...state,
+                favourites:[...state.favourites, action.payload]
+            }
+        
+        case GET_FAVOURITES:
+            return {
+                ...state,
+                favourites:action.payload
+            }
 
         default:
              break;

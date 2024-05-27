@@ -8,6 +8,7 @@ import { useGlobal } from './Context/Global';
 import Trending from './Components/Trending.jsx';
 import Random from './Components/Random.jsx';
 import Search from './Components/Search.jsx';
+import Favourites from './Components/Favourites.jsx';
 
 function App() {
   const {getRandom} = useGlobal();
@@ -20,7 +21,7 @@ function App() {
         case 'Trending':
           return <Trending/>
         case 'Liked':
-          return <Trending/>
+          return <Favourites rendered={rendered}/>
         case 'Random':
           return <Random/>
         case 'Search':
@@ -52,13 +53,13 @@ function App() {
           name = {'Random'}
           icon = {<i className = "fa-solid fa-shuffle"></i>}
           onClick= {()=> {
-            setRendered('Random')
+            setRendered('Random');
             getRandom();
           }}
         />
       </div>
       <main>
-        {content()};
+        {content()}
       </main>
     </AppStyled>
   )
@@ -74,11 +75,23 @@ const AppStyled = styled.div`
     gap:4rem;
     margin-top:4rem;
     margin-bottom:4rem;
+
+    @media screen and (max-width: 800px){
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      align-items:center;
+    }
   }
 
   main{
     padding: 2rem 8rem;
+    @media screen and (max-width:800px){
+      margin:0px 10px 0px 10px;
+      padding:0;
   }
+  }
+
 
 `;
 

@@ -8,12 +8,12 @@ import Loader from './Loader.jsx';
 
 const list = <i className = "fa-solid fa-list"></i>
 
-// const breakpointColumnsObj = {
-//     default: 4,
-//     1100: 3,
-//     700: 2,
-//     500: 1
-//   };
+const breakpointColumnsObj = {
+    default: 4,
+    1100: 3,
+    1000: 2,
+    700: 1
+  };
 
 function Search() {
     const {searchResults, loading} = useGlobal();
@@ -26,7 +26,7 @@ function Search() {
         <h2>{list} Search</h2>
         {loading && <Loader/>}
         <Masonry
-            breakpointCols={4}
+            breakpointCols={breakpointColumnsObj}
             className="my-masonry-grid"
             columnClassName="my-masonry-grid_column">
         {

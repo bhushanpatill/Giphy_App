@@ -9,22 +9,43 @@ function GiffItem({
     id,
     title,
     embed_url,
+    rendered,
     url
 }){
 
     const theme = useTheme();
 
-    const {loading} = useGlobal();
+    const {loading, saveToFavourites, removeFromLocalStorage} = useGlobal();
 
     const[modal,setModal] = useState(false);
+
 
     return (
         <GiffStyled theme = {theme}>
             {modal && <Modal title = {title} url = {url} embed_url = {embed_url} setModal = {setModal}/>}
-            {loading ? <Loader/> : <div className="gif" onDoubleClick={()=>{setModal(true)}}>
+            {loading ? <Loader/> : <div className="gif" onClick={()=>{setModal(true)}}>
                 <img src={url} alt={title} />
-                    <div className = "love">
-                        <i className = "fa-solid fa-heart"></i>
+                    <div className = "love" onClick = {()=>{
+                        if(rendered == "Liked"){
+                            removeFromLocalStorage({
+                                id,
+                                title,
+                                embed_url,
+                                rendered,
+                                url,
+                            })
+                        }
+                        else{
+                            saveToFavourites({
+                                id,
+                                title,
+                                embed_url,
+                                url
+                            })
+                        }
+                        
+                    }}>
+                        <i className = {rendered === "Liked" ? "fa-solid fa-x":"fa-solid fa-heart"}></i>
                     </div>
 
             </div>}

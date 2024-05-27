@@ -47,8 +47,26 @@ const ModalStyled = styled.div`
       z-index:15;
       border-radius:15px;
       background:${(props) => props.theme.colorBg1};
+
+
+      @media screen and (max-width:800px){
+        .model-content{
+          display:flex;
+          flex-direction: column;
+          justify-content:center;
+          align-items:center;
+          padding:2rem;
+          margin:2rem;
+
+          img{
+            width:200px;
+            height: 200px;
+          }
+        }
+      }
       .model-content{
          padding:2rem;
+        //  margin:auto auto;
          display:flex;
          align-items:center;
          gap:2rem;

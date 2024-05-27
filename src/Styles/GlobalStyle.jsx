@@ -6,6 +6,7 @@ export const GlobalStyle = createGlobalStyle`
         padding: 0;
         list-style: none;
         box-sizing: border-box;
+        font-family: "Nunito Sans", sans-serif;
     }
 
     body{

@@ -24,6 +24,15 @@ const RandomStyled = styled.article `
     width:50%;
     margin:0 auto;
 
+    // @media scree and (max-width: 100)
+
+    @media screen and (max-width:600px){
+      width:100%;
+      margin:0px 10px 0px 10px;
+      padding:1rem
+  }
+
+
 `;
 
 export default Random
