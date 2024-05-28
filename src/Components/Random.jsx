@@ -28,7 +28,7 @@ const RandomStyled = styled.article `
 
     @media screen and (max-width:600px){
       width:100%;
-      margin:0px 10px 0px 10px;
+      margin:0px 10px 10px 10pxpx;
       padding:1rem
   }
 

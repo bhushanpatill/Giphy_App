@@ -6,7 +6,7 @@ import Masonry from "react-masonry-css";
 import { useTheme } from '../Context/themeContext.jsx';
 import Loader from './Loader.jsx';
 
-const trend = <i className = "fa-solid fa-arrow-trend-up"></i>
+const trend = <i className = "fa-solid fa-heart"></i>
 
 const breakpointColumnsObj = {
     default: 4,

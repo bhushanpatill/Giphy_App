@@ -23,7 +23,7 @@ function Search() {
 
   return (
     <SearchStyled theme = {theme}>
-        <h2>{list} Search</h2>
+        <h2>{list} Search Results</h2>
         {loading && <Loader/>}
         <Masonry
             breakpointCols={breakpointColumnsObj}

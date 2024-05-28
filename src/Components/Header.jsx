@@ -48,7 +48,7 @@ function Header({ setRendered }) {
             type="text"
             onChange={handleChange}
             value={query}
-            placeholder="Search for GIF's"
+            placeholder="Search GIF's"
           ></input>
           <button className="submit-btn">{search}</button>
         </div>
@@ -73,7 +73,7 @@ const HeaderStyled = styled.header`
     height: 50px;
     padding-right: 5px;
     .GIFFY {
-      font-size: 30px;
+      font-size: 35px;
       color: white;
     }
     .bMXkCi {
@@ -128,14 +128,14 @@ const HeaderStyled = styled.header`
         border: none;
         border-radius: 15px;
 
-        font-family: "Garamond", serif;
+          font-family: Arial, Helvetica, sans-serif;
           font-size: 23px;
-          font-weight: bold;
+          font-weight: light;
 
         &::placeholder{
-          font-family: "Garamond", serif;
+          font-family: Arial, Helvetica, sans-serif;
           font-size: 23px;
-          // font-weight: bold;
+          font-weight: light;
         }
 
       }

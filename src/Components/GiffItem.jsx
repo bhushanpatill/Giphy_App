@@ -76,7 +76,7 @@ const GiffStyled = styled.div`
 
             i{
                 font-size:2rem;
-                background:linear-gradient(to right,
+                background:linear-gradient(
                     ${props => props.theme.colorYellow},
                     ${props => props.theme.colorGreen2}
                 );

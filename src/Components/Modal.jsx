@@ -2,6 +2,8 @@ import React from 'react'
 import styled from 'styled-components'
 import { useTheme } from '../Context/themeContext';
 
+// const trend = <i className = "fa-solid fa-x"></i>
+
 function Modal({title, url, embed_url, setModal}) {
     const theme = useTheme();
   return (
@@ -14,7 +16,7 @@ function Modal({title, url, embed_url, setModal}) {
                <div className="share-item">
                  <a href={url}>
                    <i className = "fa-solid fa-paper-plane"></i>
-                   <span>Shared</span>
+                   <span>Share</span>
                  </a>
                </div>
                <div className="share-item embed">
@@ -26,9 +28,12 @@ function Modal({title, url, embed_url, setModal}) {
                <div className="share-item giffy">
                  <a href={url}>
                    <i className = "fa-solid fa-up-right-from-square"></i>
-                   <span>Gipphy</span>
+                   <span>Giphy</span>
                  </a>
                </div>
+             </div>
+             <div className="cancel">
+             <i className = "fa-solid fa-x" onClick = {() => {setModal(false)}}></i>
              </div>
           </div>
         </div>
@@ -55,21 +60,45 @@ const ModalStyled = styled.div`
           flex-direction: column;
           justify-content:center;
           align-items:center;
-          padding:2rem;
-          margin:2rem;
+          padding:1.5rem;
+          margin:1rem;
 
           img{
             width:200px;
             height: 200px;
           }
+
+          .text-content{
+             h3{
+               font-size:5px;
+             }
+          }
         }
       }
       .model-content{
+         position:relative;
          padding:2rem;
-        //  margin:auto auto;
          display:flex;
          align-items:center;
          gap:2rem;
+
+         .cancel{
+            position:absolute;
+            font-size:1.2rem;
+            padding:0;
+            margin:0;
+            top:0.5rem;
+            right:0.5rem;
+            background:linear-gradient(to right,
+                ${props => props.theme.colorYellow},
+                ${props => props.theme.colorGreen2}
+            );
+            -webkit-background-clip : text;
+            -webkit-text-fill-color : transparent;
+            transition: all .3s ease-in-out;
+            cursor:pointer;
+        }
+         
 
          img{
           border-radius:5px;
