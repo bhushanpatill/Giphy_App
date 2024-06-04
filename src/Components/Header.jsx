@@ -156,6 +156,7 @@ const HeaderStyled = styled.header`
         background-size: 400% 400%;
         z-index: 1;
         padding: 0.3rem;
+        transform:scale(0);
         border-radius: 1rem;
         transition: all 0.5s ease;
         animation: gradient 3s ease-in-out infinite;
@@ -174,7 +175,7 @@ const HeaderStyled = styled.header`
 
       &:hover::after,
       &:focus-within::after {
-        transform: translateY(-50%) scale(1);
+        transform: scale(1) translateY(-50%);
       }
 
       .submit-btn {
