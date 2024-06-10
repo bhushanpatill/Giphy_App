@@ -91,7 +91,8 @@ export const GlobalProvider = ({children}) => {
 
 
     return (
-        <GlobalContext.Provider value = {{...state,
+        <GlobalContext.Provider value = {{
+            ...state,
             getRandom,
             getSearch,
             saveToFavourites,

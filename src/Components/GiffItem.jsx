@@ -32,7 +32,7 @@ function GiffItem({
                                 title,
                                 embed_url,
                                 rendered,
-                                url,
+                                url
                             })
                         }
                         else{
