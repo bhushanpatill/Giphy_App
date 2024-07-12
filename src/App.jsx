@@ -14,7 +14,7 @@ function App() {
   const {getRandom} = useGlobal();
   const theme = useTheme();
 
-  const [rendered, setRendered] = useState('trending');
+  const [rendered, setRendered] = useState('Trending');
 
   const content = () => {
       switch(rendered){
